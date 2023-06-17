@@ -17,7 +17,7 @@ def E_pionphoto(bs,masses,params): #Energy function
     A=[1/(b**2) for b in bs]
     N,H=mat.pion_test_1d(A,masses,params)
     E,c=eigh(H,N, subset_by_index=[0,0])
-    #print(E[0])
+    print(E[0])
     c0=c
     return E,c0
 
@@ -166,6 +166,7 @@ def global_minP(ngaus,dim,bmax,masses,params):
         bs1=np.append(bs1,bs) #Add generated element to basis
         for j in range(n_calls):
             masses_min[0]=masses[0]-E0S
+            print('Iteration of masses:', j)
             resS=minimize(minfuncP, bs1, args=(masses_min,params,), method="Nelder-Mead",options={'disp': True} ) #Optimize parameters
             E0S,C0S=E_pionphoto(resS.x,masses_min,params)
         E_list=np.append(E_list,E0S)
