@@ -42,7 +42,8 @@ E_list=[-85.52435455378392,
 -585.7551715463566,
 -585.7551729416318]
 iterations=np.linspace(1,len(E_list)+1,len(E_list))
-print(len(iterations),len(E_list))
+comp_final=[-585.7551729416318]*len(E_list)
+
 
 SMALL_SIZE = 12
 INTERMEDIATE_SIZE=14
@@ -56,9 +57,12 @@ plt.rcParams['xtick.labelsize']=SMALL_SIZE
 plt.rcParams['ytick.labelsize']=SMALL_SIZE
 
 ticksY=[0,-50,-100,-150,-200,-250,-300,-350,-400,-450,-500,-550,-600]
-plt.plot(iterations,E_list)
+plt.plot(iterations,E_list, label='Minimizer energies')
+plt.plot(iterations,comp_final, '--', label='Final energy')
 plt.yticks(np.arange(min(ticksY),max(ticksY),50))
 plt.ylim([-600,-50])
+plt.legend()
 plt.xlabel('Number of Function Evaluations')
 plt.ylabel('Energy [MeV]')
+plt.savefig('figures/1pionIterations.pdf'.format(0),bbox_inches='tight')
 plt.show()
